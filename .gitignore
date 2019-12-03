@@ -9,3 +9,7 @@ TODO
 .DS_Store
 misc/
 results.txt
+.metals/
+.bloop/
+project/metals.sbt
+null/
