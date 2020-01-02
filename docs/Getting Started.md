@@ -6,7 +6,7 @@ This code is based on [spark-cdm](https://github.com/Azure/spark-cdm) but has be
 ## Configuring Access to Azure Data Lake Store (Gen2)
 In order to access resources in Azure, such as Azure Data Lake Store (ADLS), you should configure a [Service Principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals) that will be used to grant access. Once you do this (If you are unfamiliar with creating a Service Principal, you can follow the steps [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) to create one.) Keep in mind that you MUST copy the client secret as you will only be able to view it during the creation process. You will need the following 3 things from the object that you just created:
 1. The Application ID (also known as a "Client ID"), which will be in the form of a GUID
-2. The Tenant ID, which will be in the form of a GUID
+2. The Tenant ID, which will be in the form of a GUID (Note: You do not need the full URL as you would in some ADLS itegrations, just the GUID)
 3. The Client Secret (sometimes called a Token). Note that this will ONLY be available during the creation process
 
 Once the service principal has been created, you will need to assign permissions to it in your ADLS account. The recommended way is to use [Azure RBAC](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview) controls and assign the role [Storage Blob Data Contributor](https://docs.microsoft.com/en-us/azure/storage/common/storage-auth-aad-rbac-portal) to your ADLS Account. (See the previous link if you are unfamiliar with how to do this)
@@ -73,3 +73,5 @@ Once the data is stored in a Spark Table, you can call the write.format method o
                        .option("cdmModelName", cdmModelName)
                        .save())
 
+## Using spark-cdm to read a CDM Folder
+Reading from a CDM folder is relatively straightforward. The process is exactly as described above, except you call the read.format method
